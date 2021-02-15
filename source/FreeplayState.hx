@@ -28,8 +28,14 @@ class FreeplayState extends MusicBeatState
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
 
+	var trackedAssets:Array<Dynamic> = [];
+
 	override function create()
 	{
+		#if desktop
+		DiscordManager.updateState("Freeplay Menu", '');
+		#end
+
 		songs = CoolUtil.coolTextFile('assets/data/freeplaySonglist.txt');
 
 		/* 
@@ -46,38 +52,69 @@ class FreeplayState extends MusicBeatState
 		isDebug = true;
 		#end
 
-		if (StoryMenuState.weekUnlocked[2] || isDebug)
+		if (StoryMenuState.weekUnlocked[1] || isDebug)
 		{
-			songs.push('Spookeez');
-			songs.push('South');
+			songs.push('Tutorial B-Side');
+			songs.push('Ridge');
+			songs.push('Bopeebo');
+			songs.push('Fresh');
+			songs.push('Dadbattle');
 		}
 
 		if (StoryMenuState.weekUnlocked[3] || isDebug)
 		{
+			songs.push('Bopeebo B-Side');
+			songs.push('Fresh B-Side');
+			songs.push('Dadbattle B-Side');
+			songs.push('Spookeez');
+			songs.push('South');
+			songs.push('Monster');
+		}
+
+		if (StoryMenuState.weekUnlocked[5] || isDebug)
+		{
+			songs.push('Spookeez B-Side');
+			songs.push('South B-Side');
 			songs.push('Pico');
 			songs.push('Philly');
 			songs.push('Blammed');
 		}
 
-		if (StoryMenuState.weekUnlocked[4] || isDebug)
+		if (StoryMenuState.weekUnlocked[7] || isDebug)
 		{
+			songs.push('Pico B-Side');
+			songs.push('Philly B-Side');
+			songs.push('Blammed B-Side');
 			songs.push('Satin-Panties');
 			songs.push('High');
 			songs.push('Milf');
 		}
 
-		if (StoryMenuState.weekUnlocked[5] || isDebug)
+		if (StoryMenuState.weekUnlocked[9] || isDebug)
 		{
+			songs.push('Satin-Panties B-Side');
+			songs.push('High B-Side');
+			songs.push('Milf B-Side');
+		}
+
+		if (StoryMenuState.weekUnlocked[10] || isDebug)
+		{
+			songs.push('High C-Side');
+			songs.push('Milf C-Side');
 			songs.push('Cocoa');
 			songs.push('Eggnog');
 			songs.push('Winter-Horrorland');
 		}
 
-		if (StoryMenuState.weekUnlocked[6] || isDebug)
+		if (StoryMenuState.weekUnlocked[11] || isDebug)
 		{
 			songs.push('Senpai');
 			songs.push('Roses');
 			songs.push('Thorns');
+			songs.push('Sanspai');
+			songs.push('Down to the bone');
+			songs.push('Crossing My Road');
+			songs.push('Baka Mitai');
 			// songs.push('Winter-Horrorland');
 		}
 

@@ -20,7 +20,6 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
-import io.newgrounds.NG;
 import lime.app.Application;
 import openfl.Assets;
 import polymod.Polymod;
@@ -46,6 +45,10 @@ class TitleState extends MusicBeatState
 	{
 		Polymod.init({modRoot: "mods", dirs: ['introMod']});
 
+		#if desktop
+		DiscordManager.init();
+		#end
+
 		#if (!web)
 		TitleState.soundExt = '.ogg';
 		#end
@@ -58,11 +61,8 @@ class TitleState extends MusicBeatState
 
 		super.create();
 
-		NGio.noLogin(APIStuff.API);
-
-		#if ng
-		var ng:NGio = new NGio(APIStuff.API, APIStuff.EncKey);
-		trace('NEWGROUNDS LOL');
+		#if newgrounds
+			NGio.initNoAPI();
 		#end
 
 		FlxG.save.bind('funkin', 'ninjamuffin99');
@@ -88,10 +88,7 @@ class TitleState extends MusicBeatState
 		#elseif CHARTING
 		FlxG.switchState(new ChartingState());
 		#else
-		new FlxTimer().start(1, function(tmr:FlxTimer)
-		{
-			startIntro();
-		});
+		startIntro();
 		#end
 	}
 
@@ -180,7 +177,7 @@ class TitleState extends MusicBeatState
 		blackScreen = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		credGroup.add(blackScreen);
 
-		credTextShit = new Alphabet(0, 0, "ninjamuffin99\nPhantomArcade\nkawaisprite\nevilsk8er", true);
+		credTextShit = new Alphabet(0, 0, "AlexGamingSW and Dodixxx", true);
 		credTextShit.screenCenter();
 
 		// credTextShit.alignment = CENTER;
@@ -226,8 +223,7 @@ class TitleState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		if (FlxG.sound.music != null)
-			Conductor.songPosition = FlxG.sound.music.time;
+		Conductor.songPosition = FlxG.sound.music.time;
 		// FlxG.watch.addQuick('amp', FlxG.sound.music.amplitude);
 
 		if (FlxG.keys.justPressed.F)
@@ -274,7 +270,7 @@ class TitleState extends MusicBeatState
 
 				var version:String = "v" + Application.current.meta.get('version');
 
-				if (version.trim() != NGio.GAME_VER_NUMS && !OutdatedSubState.leftState)
+				if (version.trim() != NGio.GAME_VER.trim() && !OutdatedSubState.leftState)
 				{
 					trace('OLD VERSION!');
 					FlxG.switchState(new OutdatedSubState());
@@ -341,27 +337,16 @@ class TitleState extends MusicBeatState
 
 		switch (curBeat)
 		{
-			case 1:
-				createCoolText(['ninjamuffin99', 'phantomArcade', 'kawaisprite', 'evilsk8er']);
-			// credTextShit.visible = true;
 			case 3:
-				addMoreText('present');
-			// credTextShit.text += '\npresent...';
-			// credTextShit.addText();
-			case 4:
-				deleteCoolText();
-			// credTextShit.visible = false;
-			// credTextShit.text = 'In association \nwith';
-			// credTextShit.screenCenter();
+				createCoolText(['AlexGamingSW']);
 			case 5:
-				createCoolText(['In association', 'with']);
+				addMoreText('\nand');
+				addMoreText('\nDodixxx');
 			case 7:
-				addMoreText('newgrounds');
-				ngSpr.visible = true;
+				addMoreText('\npresent');
 			// credTextShit.text += '\nNewgrounds';
 			case 8:
 				deleteCoolText();
-				ngSpr.visible = false;
 			// credTextShit.visible = false;
 
 			// credTextShit.text = 'Shoutouts Tom Fulp';

@@ -4,7 +4,6 @@ import Controls.Control;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxSubState;
-import flixel.addons.transition.FlxTransitionableState;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.input.keyboard.FlxKey;
 import flixel.system.FlxSound;
@@ -19,11 +18,36 @@ class PauseSubState extends MusicBeatSubstate
 
 	var pauseMusic:FlxSound;
 
+	var stageSuffix:String = "";
+
 	public function new(x:Float, y:Float)
 	{
+
+		var daStage = PlayState.curStage;
+		var daBf:String = '';
+		switch (daStage)
+		{
+			case 'stageB':
+				stageSuffix = '-b-side';
+				daBf = 'bf';
+			case 'spookyB':
+				stageSuffix = '-b-side';
+				daBf = 'bf';
+			case 'phillyB':
+				stageSuffix = '-b-side';
+				daBf = 'bf';
+			case 'limoB':
+				stageSuffix = '-b-side';
+				daBf = 'bf';
+			default:
+				stageSuffix = '';
+				daBf = 'bf';
+		}
+		
+
 		super();
 
-		pauseMusic = new FlxSound().loadEmbedded('assets/music/breakfast' + TitleState.soundExt, true, true);
+		pauseMusic = new FlxSound().loadEmbedded('assets/music/breakfast' +  stageSuffix + TitleState.soundExt, true, true);
 		pauseMusic.volume = 0;
 		pauseMusic.play(false, FlxG.random.int(0, Std.int(pauseMusic.length / 2)));
 

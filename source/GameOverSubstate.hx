@@ -20,13 +20,29 @@ class GameOverSubstate extends MusicBeatSubstate
 		var daBf:String = '';
 		switch (daStage)
 		{
+			case 'stageB':
+				stageSuffix = '-b-side';
+				daBf = 'bf';
+			case 'spookyB':
+				stageSuffix = '-b-side';
+				daBf = 'bf';
+			case 'phillyB':
+				stageSuffix = '-b-side';
+				daBf = 'bf';
+			case 'limoB':
+				stageSuffix = '-b-side';
+				daBf = 'bf';
 			case 'school':
 				stageSuffix = '-pixel';
 				daBf = 'bf-pixel-dead';
 			case 'schoolEvil':
 				stageSuffix = '-pixel';
 				daBf = 'bf-pixel-dead';
+			case 'schoolsans':
+				stageSuffix = '-pixel';
+				daBf = 'bf-pixel-dead';
 			default:
+				stageSuffix = '';
 				daBf = 'bf';
 		}
 

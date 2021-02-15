@@ -2,7 +2,6 @@ package;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.addons.transition.FlxTransitionableState;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.group.FlxGroup;
@@ -21,35 +20,56 @@ class StoryMenuState extends MusicBeatState
 
 	var weekData:Array<Dynamic> = [
 		['Tutorial'],
+		['Tutorial B-Side'],
 		['Bopeebo', 'Fresh', 'Dadbattle'],
-		['Spookeez', 'South'],
+		['Bopeebo B-Side', 'Fresh B-Side', 'Dadbattle B-Side'],
+		['Spookeez', 'South', 'Monster'],
+		['Spookeez B-Side', 'South B-Side'],
 		['Pico', 'Philly', "Blammed"],
+		['Pico B-Side', 'Philly B-Side', "Blammed B-Side"],
 		['Satin-Panties', "High", "Milf"],
+		['Satin-Panties B-Side', "High B-Side", "Milf B-Side"],
+		["High C-Side", "Milf C-Side"],
 		['Cocoa', 'Eggnog', 'Winter-Horrorland'],
-		['Senpai', 'Roses', 'Thorns']
+		['Senpai', 'Roses', 'Thorns'],
+		['Tutorial', 'Tutorial B-Side', 'Ridge', 'Bopeebo', 'Fresh', 'Dadbattle', 'Bopeebo B-Side', 'Fresh B-Side', 'Dadbattle B-Side', 'Spookeez', 'South', 'Monster', 'Spookeez B-Side', 'South B-Side', 'Pico', 'Philly', "Blammed", 'Pico B-Side', 'Philly B-Side', "Blammed B-Side", 'Satin-Panties', "High", "Milf", 'Satin-Panties B-Side', "High B-Side", "Milf B-Side", "High C-Side", "Milf C-Side", 'Cocoa', 'Eggnog', 'Winter-Horrorland', 'Senpai', 'Roses', 'Thorns', 'Sanspai', 'Baka Mitai']
 	];
 	var curDifficulty:Int = 1;
 
-	public static var weekUnlocked:Array<Bool> = [true, true, true, true, true, true, true];
+	public static var weekUnlocked:Array<Bool> = [true, true, true, true, true, true, true, true, true, true, true, true, true, true];
 
 	var weekCharacters:Array<Dynamic> = [
 		['dad', 'bf', 'gf'],
 		['dad', 'bf', 'gf'],
+		['dad', 'bf', 'gf'],
+		['dad', 'bf', 'gf'],
+		['spooky', 'bf', 'gf'],
 		['spooky', 'bf', 'gf'],
 		['pico', 'bf', 'gf'],
+		['pico', 'bf', 'gf'],
+		['mom', 'bf', 'gf'],
+		['mom', 'bf', 'gf'],
 		['mom', 'bf', 'gf'],
 		['parents-christmas', 'bf', 'gf'],
-		['senpai', 'bf', 'gf']
+		['senpai', 'bf', 'gf'],
+		['dad', 'bf', 'gf']
 	];
 
 	var weekNames:Array<String> = [
 		"",
+		"Heatin' Up",
 		"Daddy Dearest",
+		"Rockstar",
 		"Spooky Month",
+		"Graveyard Shift",
 		"PICO",
+		"Drop Out",
 		"MOMMY MUST MURDER",
+		"Popstar",
+		"",
 		"RED SNOW",
-		"hating simulator ft. moawling"
+		"hating simulator ft. moawling",
+		"Welcome to the hell"
 	];
 
 	var txtWeekTitle:FlxText;
@@ -70,9 +90,11 @@ class StoryMenuState extends MusicBeatState
 
 	override function create()
 	{
-		transIn = FlxTransitionableState.defaultTransIn;
-		transOut = FlxTransitionableState.defaultTransOut;
 
+		#if desktop
+		DiscordManager.updateState("Main Menu", '');
+		#end
+		
 		if (FlxG.sound.music != null)
 		{
 			if (!FlxG.sound.music.playing)
@@ -94,7 +116,7 @@ class StoryMenuState extends MusicBeatState
 		rankText.size = scoreText.size;
 		rankText.screenCenter(X);
 
-		var ui_tex = FlxAtlasFrames.fromSparrow('assets/images/campaign_menu_UI_assets.png', 'assets/images/campaign_menu_UI_assets.xml');
+		var ui_tex = FlxAtlasFrames.fromSparrow('assets/images/campaign_menu_UI_assets_difficulties.png', 'assets/images/campaign_menu_UI_assets_difficulties.xml');
 		var yellowBG:FlxSprite = new FlxSprite(0, 56).makeGraphic(FlxG.width, 400, 0xFFF9CF51);
 
 		grpWeekText = new FlxTypedGroup<MenuItem>();

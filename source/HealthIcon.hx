@@ -1,13 +1,51 @@
 package;
 
 import flixel.FlxSprite;
+import Song.SwagSong;
 
 class HealthIcon extends FlxSprite
 {
+
+	var customsprite:String = "";
+	
 	public function new(char:String = 'bf', isPlayer:Bool = false)
 	{
+
+		var daStage = PlayState.curStage;
+		var daBf:String = '';
+		switch (daStage)
+		{
+			case 'stageB':
+				customsprite = 'b-side/';
+				daBf = 'bf';
+			case 'papyrus':
+				customsprite = 'undertale/';
+				daBf = 'bf';
+			case 'spookyB':
+				customsprite = 'b-side/';
+				daBf = 'bf';
+			case 'phillyB':
+				customsprite = 'b-side/';
+				daBf = 'bf';
+			case 'roblox':
+				customsprite = 'roblox/';
+				daBf = 'bf';
+			case 'limoB':
+				customsprite = 'b-side/';
+				daBf = 'bf';
+			case 'limoC':
+				customsprite = 'c-side/';
+				daBf = 'bf';
+			case 'schoolsans':
+				customsprite = 'undertale/';
+				daBf = 'bf';
+			default:
+				customsprite = '';
+				daBf = 'bf';
+		}
+
 		super();
-		loadGraphic('assets/images/iconGrid.png', true, 150, 150);
+		loadGraphic('assets/images/' + customsprite + 'iconGrid.png', true, 150, 150);
 
 		antialiasing = true;
 		animation.add('bf', [0, 1], 0, false, isPlayer);
